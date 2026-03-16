@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -26,7 +27,8 @@ void Izpis_Stevil(int* polje, unsigned int velikost) {
     for (int i = 0; i<velikost; i++)
         output << polje[i] << ' ';
 }
-//
+
+// TODO ---------------------------------------------------
 
 void getMinMax(int& min, int& max, vector<int>& nums){
     for(auto num: nums){
@@ -49,6 +51,37 @@ void addMin(const int& min, vector<int>& nums) {
     }
 }
 
+void countingSort(vector<int> &A) {
+    bool negative = false;
+    int min, max;
+    getMinMax(min, max, A);
+
+    if (min < 0) {
+        negative = true;
+        max -= min;
+        subtractMin(min, A);
+    }
+
+    vector<int> C(max+1);
+
+    for (const int num: A) {
+        C[num]++;
+    }
+
+    for (int i = 1; i < C.size(); i++){
+        C[i] += C[i-1];
+    }
+    vector<int> B(A.size());
+    for (int i = A.size()-1; i >= 0; i--){
+        B[C[A[i]]-1] = A[i];
+        C[A[i]]--;
+    }
+    if (negative)
+        addMin(min, B);
+
+    A = B;
+}
+
 vector<int> pridobiD(const vector<int> &vec, int k) {
     vector<int> D;
     for (int a: vec) {
@@ -64,13 +97,14 @@ int main(int argc, const char* argv[]) {
     if (argc < 2) return 0;
     if (!Branje_Stevil(A, argv[1])) return 0;
 
-    int k = 0;
-    vector<int> D = pridobiD(A, k);
+    // int k = 0;
+    // vector<int> D = pridobiD(A, k);
 
+    countingSort(A);
 
     // TODO
 
-    Izpis_Stevil(&D[0], D.size());
+    Izpis_Stevil(&A[0], A.size());
 
     return 0;
 }
