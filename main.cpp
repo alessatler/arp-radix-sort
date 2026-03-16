@@ -42,11 +42,9 @@ int main(int argc, const char* argv[]) {
     if (argc < 2) return 0;
     if (!Branje_Stevil(A, argv[1])) return 0;
 
-    int k = 0;
-    vector<int> D = pridobiD(A, k);
-
-
-    // TODO
+    for (int k = 0; k < 8; i++) {
+        // TODO
+    }
 
     Izpis_Stevil(&D[0], D.size());
 
