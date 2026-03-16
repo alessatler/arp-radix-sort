@@ -27,15 +27,28 @@ void Izpis_Stevil(int* polje, unsigned int velikost) {
         output << polje[i] << ' ';
 }
 
+vector<int> pridobiD(const vector<int> &vec, int k) {
+    vector<int> D;
+    for (int a: vec) {
+        D.push_back((a >> k) & 1);
+    }
+
+    return D;
+}
+
 int main(int argc, const char* argv[]) {
     vector<int> A;
 
     if (argc < 2) return 0;
     if (!Branje_Stevil(A, argv[1])) return 0;
 
+    int k = 0;
+    vector<int> D = pridobiD(A, k);
+
+
     // TODO
 
-    Izpis_Stevil(&A[0], A.size());
+    Izpis_Stevil(&D[0], D.size());
 
     return 0;
 }
