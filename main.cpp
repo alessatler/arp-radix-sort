@@ -26,6 +26,28 @@ void Izpis_Stevil(int* polje, unsigned int velikost) {
     for (int i = 0; i<velikost; i++)
         output << polje[i] << ' ';
 }
+//
+
+void getMinMax(int& min, int& max, vector<int>& nums){
+    for(auto num: nums){
+        if (num < min)
+            min = num;
+        else if (num > max)
+            max = num;
+    }
+}
+
+void subtractMin(const int& min, vector<int>& nums) {
+    for (int& num: nums) {
+        num -= min;
+    }
+}
+
+void addMin(const int& min, vector<int>& nums) {
+    for (int& num: nums) {
+        num += min;
+    }
+}
 
 vector<int> pridobiD(const vector<int> &vec, int k) {
     vector<int> D;
